@@ -13,7 +13,7 @@ export const Demo = () => {
         {store && store.todos?.map((item) => {
           return (
             <li
-              key={item.id}  // React key for list items.
+              key={item.id} 
               className="list-group-item d-flex justify-content-between"
               style={{ background: item.background }}> 
               
