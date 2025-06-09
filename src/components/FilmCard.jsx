@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onFavoriteClick }) => {
-    const vehicleImageUrl = `https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/vehicles/${uid}.jpg`;
+export const FilmCard = ({ uid, release_date, episode_id, title, onFavoriteClick }) => {
+    const filmImageUrl = `https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/films/${uid}.jpg`;
     
     return (
-        <div className="vehicle-card" style={{
+            <div className="film-card" style={{
             width: "18rem",
             borderRadius: "10px",
             overflow: "hidden",
@@ -15,8 +15,7 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
             flexShrink: 0
         }}>
             <img 
-                src={vehicleImageUrl} 
-                alt={name}
+                src={filmImageUrl} 
                 style={{
                     height: "250px",
                     width: "100%",
@@ -33,16 +32,16 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
                     color: "#212529",
                     borderBottom: "2px solid #6c757d",
                     paddingBottom: "0.5rem"
-                }}>{name}</h5>
+                }}>{title}</h5>
                 <ul style={{
                     listStyle: "none",
                     padding: 0,
                     margin: "0 0 1.5rem 0",
                     fontSize: "0.95rem"
                 }}>
-                    <li>Model: {model}</li>
-                    <li>Manufacturer: {manufacturer}</li>
-                    <li>Class: {vehicle_class}</li>
+                    <li>Title: {title}</li>
+                    <li>Release date: {release_date}</li>
+                    <li>Episode: {episode_id}</li>
                 </ul>
                 <div style={{
                     display: "flex",
@@ -50,7 +49,7 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
                     alignItems: "center",
                     gap: "0.5rem"
                 }}>
-                    <Link to={`/profile-page/vehicles/${uid}`} style={{ flexGrow: 1 }}>
+                    <Link to={`/profile-page/films/${uid}`} style={{ flexGrow: 1 }}>
                         <button style={{
                             width: "100%",
                             backgroundColor: "#0d6efd",

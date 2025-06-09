@@ -2,41 +2,33 @@ import { CharacterCard } from "./CharacterCard";
 
 
 
-export const CharacterCardList = ({ allPeople, singlePerson, dispatch}) => {
+export const CharacterCardList = ({ allPeople, dispatch}) => {
 const handleFavoriteClick = (person) => {
-  dispatch({
-    type: 'favoritedPerson',
-    payload: {
-      uid: person.uid,
-      name: person.name
-    }
-  })
-}
-  return (
-    <div className="d-flex overflow-auto" style={{ flexWrap: 'nowrap' }}>
+    dispatch({
+      type: 'bookmark',
+      payload: {
+        uid: person.uid,
+        name: person.name,
+        type: person
 
-      {singlePerson && singlePerson.map(person => (
-        <CharacterCard 
-          key={`single-${person.uid}`}
-          uid={person.uid}
-          name={person.name}
-          //hair_color={singlePerson.hair_color}
-          //eyes={singlePerson.eye_color}
-          onFavoriteClick={() => handleFavoriteClick}
-        />
-      ))}
-      
-      {/* Render all people */}
-      {allPeople && allPeople.map(person => (
+      }
+    });
+  };
+
+  return (
+    <div className="card-carousel-container">
+      <div className="card-carousel">
+      {allPeople.map(person => (
         <CharacterCard 
           key={`all-${person.uid}`}
           uid={person.uid}
           name={person.name}
           //hair_color={singlePerson.hair_color}
           //eyes={singlePerson.eye_color}
-          onFavoriteClick={() => handleFavoriteClick}
+          onFavoriteClick={() => handleFavoriteClick(person)}
         />
       ))}
+    </div>
     </div>
   );
 };

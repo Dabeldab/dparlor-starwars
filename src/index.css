@@ -1,0 +1,140 @@
+/* Character Card Container */
+.character-card {
+  width: 18rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  margin: 1rem;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Card Image */
+.character-card .card-img-top {
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 3px solid #0d6efd;
+}
+
+/* Card Body */
+.character-card .card-body {
+  padding: 1.5rem;
+}
+
+/* Card Title */
+.character-card .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-bottom: 2px solid #6c757d;
+  padding-bottom: 0.5rem;
+}
+
+.character-card .card-details {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.character-card .card-details:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+/* Button Container */
+.character-card .card-body > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Primary Button */
+.character-card .btn-primary {
+  flex-grow: 1;
+  background-color: #0d6efd;
+  border: none;
+  transition: all 0.2s;
+}
+
+.character-card .btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: scale(1.05);
+}
+
+
+.character-card .btn-favorite:hover {
+  background-color: #ffc107;
+  color: white;
+  transform: rotate(10deg);
+}
+
+@media (max-width: 576px) {
+  .character-card {
+    width: 100%;
+    max-width: 22rem;
+    margin: 1rem auto;
+  }
+}
+
+.character-card .btn-favorite.favorited {
+  background-color: #ffc107;
+  color: white;
+}
+
+.card-carousel-container {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.card-carousel-container::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(to right, transparent, var(--bs-body-bg));
+  pointer-events: none;
+  z-index: 10;
+}
+
+.card-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.5rem;
+  padding: 0 2rem 1rem 2rem;
+  scroll-padding: 0 2rem;
+  -ms-overflow-style: none;
+  scrollbar-width:thin;
+}
+
+
+.character-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto; 
+  width: 280px; 
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .card-carousel {
+    padding: 0 1.5rem 1rem 1.5rem;
+    gap: 1rem;
+  }
+  
+  .character-card {
+    width: 260px;
+  }
+  
+  .card-carousel-container::after {
+    width: 40px;
+  }
+}

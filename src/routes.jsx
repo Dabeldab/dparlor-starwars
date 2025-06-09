@@ -11,7 +11,9 @@ import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 import {StarWarsLandingPage} from "./pages/StarWarsLandingPage"
 import {ProfilePage} from "./pages/ProfilePage"
-
+import {PlanetProfilePage} from "./pages/PlanetProfilePage"
+import {VehicleProfilePage} from "./pages/VehicleProfilePage"
+import { MovieProfilePage } from "./pages/MovieProfilePage";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,9 +29,10 @@ export const router = createBrowserRouter(
         {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
         <Route path="/" element={<StarWarsLandingPage/>} />
         <Route path="/profile-page/people/:uid" element={<ProfilePage/>} />
-        <Route path= "/element" element={<Home />} />
-        <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
-        <Route path="/demo" element={<Demo />} />
+        <Route path="/profile-page/planets/:uid" element={<PlanetProfilePage/>} />
+        <Route path="/profile-page/vehicles/:uid" element={<VehicleProfilePage/>} />
+        <Route path="/profile-page/films/:uid" element={<MovieProfilePage/>} />
+        <Route path="/element" element={<Home />} />
         </Route>
     )
 );

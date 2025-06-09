@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onFavoriteClick }) => {
-    const vehicleImageUrl = `https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/vehicles/${uid}.jpg`;
+export const PlanetCard = ({ uid, name, climate, terrain, population, onFavoriteClick }) => {
+    const planetImageUrl = `https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/planets/${uid}.jpg`;
     
     return (
-        <div className="vehicle-card" style={{
+            <div className="vehicle-card" style={{
             width: "18rem",
             borderRadius: "10px",
             overflow: "hidden",
@@ -15,7 +15,7 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
             flexShrink: 0
         }}>
             <img 
-                src={vehicleImageUrl} 
+                src={planetImageUrl} 
                 alt={name}
                 style={{
                     height: "250px",
@@ -40,9 +40,9 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
                     margin: "0 0 1.5rem 0",
                     fontSize: "0.95rem"
                 }}>
-                    <li>Model: {model}</li>
-                    <li>Manufacturer: {manufacturer}</li>
-                    <li>Class: {vehicle_class}</li>
+                    <li>Climate: {climate}</li>
+                    <li>Terrain: {terrain}</li>
+                    <li>Population: {population}</li>
                 </ul>
                 <div style={{
                     display: "flex",
@@ -50,7 +50,7 @@ export const VehicleCard = ({ uid, name, model, manufacturer, vehicle_class, onF
                     alignItems: "center",
                     gap: "0.5rem"
                 }}>
-                    <Link to={`/profile-page/vehicles/${uid}`} style={{ flexGrow: 1 }}>
+                    <Link to={`/profile-page/planets/${uid}`} style={{ flexGrow: 1 }}>
                         <button style={{
                             width: "100%",
                             backgroundColor: "#0d6efd",

@@ -1,19 +1,24 @@
 import react, {useState,useEffect} from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer"
-import { fetchAllPeople,fetchAllPlanets,fetchAllVehicles,fetchOnePerson } from "../lib/fetch"
+import { fetchAllFilms, fetchAllPeople,fetchAllPlanets,fetchAllVehicles } from "../lib/fetch"
 import { CharacterCardList } from "../components/CharacterCardList"
+import { PlanetCardList } from "../components/PlanetCardList"
+import { VehicleCardList } from "../components/VehicleCardList"
+import { FilmCardList } from "../components/FilmCardList"
+
 
 export const StarWarsLandingPage = ()=> {
     const {store, dispatch} = useGlobalReducer();
 
 const Favorites = ()=> {
-  const favoriteCharacter = store.filter((favorite) => (store.favorites))
+  const favoriteCharacter = store.filter
+  return Favorites
 }
 useEffect(() => {
     fetchAllPeople(dispatch)
-    fetchOnePerson(dispatch)
-    //fetchAllPlanets(dispatch)
-    //fetchAllVehicles(dispatch)
+    fetchAllPlanets(dispatch)
+    fetchAllVehicles(dispatch)
+    fetchAllFilms(dispatch)
 }, [])
 
 
@@ -24,11 +29,45 @@ useEffect(() => {
             <div className="">
             <div className="" >
                 <div>
-                    <h1 style={{ overflowX: 'auto', maxWidth: '100%' }}>Characters</h1>
+                    <h1 >Characters</h1>
+                    
                     <CharacterCardList
                     allPeople={store.allPeople}
-                    singlePerson={store.singlePerson}
-                    favorites={store.favorites}/>
+                    favorites={store.favorites}
+                    dispatch={dispatch}
+                    />
+                    <br/>
+                    <br/>
+
+                    <h1>Planets</h1>
+                    <br/>
+                    <PlanetCardList
+                    allPlanets={store.allPlanets}
+                    favorites={store.favorites}
+                    dispatch={dispatch}
+                    />
+                    <br/>
+                    <br/>
+
+                    <h1>Vehicles</h1>
+                    <br/>
+
+                    <VehicleCardList
+                    allVehicles={store.allVehicles}
+                    favorites={store.favorites}
+                    dispatch={dispatch}
+                    />
+                    <br/>
+                    <br/>
+
+                    <h1></h1>
+                    <br/>
+
+                    <FilmCardList
+                    allFilms={store.allFilms}
+                    favorites={store.favorites}
+                    dispatch={dispatch}
+                    />
                     </div>
                 </div>
             </div>

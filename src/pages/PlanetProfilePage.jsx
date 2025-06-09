@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 
-export const ProfilePage = () => {
+export const PlanetProfilePage = () => {
   const { uid } = useParams();
-  const [character, setCharacter] = useState(null);
+  const [planet, setPlanet] = useState(null);
   const { store, dispatch } = useGlobalReducer();
 
   useEffect(() => {
@@ -12,18 +12,18 @@ export const ProfilePage = () => {
       try {
 
         
-        // Fetch character data from SWAPI.tech
-        const response = await fetch(`https://www.swapi.tech/api/people/${uid}`);
+        // Fetch planet data from SWAPI.tech
+        const response = await fetch(`https://www.swapi.tech/api/planets/${uid}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        setCharacter(data.result.properties);
+        setPlanet(data.result.properties);
         
       } 
       catch (error) {
-        console.error("Error getting Star Wars People profiles", error);
+        console.error("Error getting Star Wars Planet details", error);
   }
     };
 
@@ -31,35 +31,31 @@ export const ProfilePage = () => {
   }, [uid]);
 
 
-  if (!character) return <div className="alert alert-warning mt-3">No character data found</div>;
+  if (!planet) return <div className="alert alert-warning mt-3">No planet data found</div>;
 
   return (
     <div className="container py-4">
-      {/* Character Card */}
+      {/* planet Card */}
       <div className="card mb-4">
-        <img className="character-card-img" style={{width: "200px", height: "300px"}} src={`https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/people/${uid}.jpg`} ></img>
+        <img className="planet-card-img" style={{width: "300px", height: "300px"}} src={`https://raw.githubusercontent.com/breatheco-de/swapi-images/master/public/images/planets/${uid}.jpg`} ></img>
         <div className="card-body">
-          <h1 className="card-title">{character.name}</h1>
+          <h1 className="card-title">{planet.name}</h1>
           
           <div className="card-subtitle mb-3 text-muted">
-            Born: {character.birth_year || 'unknown'} | Gender: {character.gender || 'unknown'}
+            Climate: {planet.climate} | diameter: {planet.diameter}
           </div>
           
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
-              <strong>Height:</strong> {character.height || 'unknown'} cm
+              <strong>Population:</strong> {planet.population}
             </li>
             <li className="list-group-item">
-              <strong>Mass:</strong> {character.mass || 'unknown'} kg
+              <strong>Terrain:</strong> {planet.terrain}
             </li>
             <li className="list-group-item">
-              <strong>Hair Color:</strong> {character.hair_color || 'unknown'}
+              <strong>Orbital Period:</strong> {planet.orbital_period}
             </li>
-            <li className="list-group-item">
-              <strong>Eye Color:</strong> {character.eye_color || 'unknown'}
-            </li>
-
-          </ul>
+            </ul>
         </div>
       </div>
 
