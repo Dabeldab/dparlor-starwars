@@ -1,34 +1,39 @@
 import React, {useState,useEffect} from "react";
 
-export const initialStore=()=>{
-  return{
+export const initialStore ={
       allPeople: [],
       allPlanets: [],
       allVehicles: [],
-      singlePerson: [],
-      singlePlanets: [],
-      singleVehicles: [],
-      singleStarships: [],
+      allFilms: [],
       favorites: []
-  }
 }
 
 export default function storeReducer(store, action = {}) {
+   
   switch(action.type){
-    //case 'add_task':
+    
+      case 'bookmark':
+          const {uid, name,type} = action.payload
+            const starId = `${type}_${uid}`;
 
-      //const { id,  color } = action.payload
+              console.log(`Added ${name} with id of ${uid} ${starId}`)
 
-      //return {
-        //...store,
-       // todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
-      //};
-      case 'favoritePerson':
-        const favoriteArray = action.payload
+          const exists = store.favorites.some(fav => fav.starId === starId);
+          if (exists) return store;
+
+        const filteredArray = store.favorites.filter(favorite => favorite.starId !== starId)
         return {
           ...store, 
-          favorites: [...store, ...favoriteArray]
+          favorites: [...store.favorites.filter(fav => fav.starId !== starId),
+          { starId, uid, name }]
         }
+      
+      case 'removeBookmark':
+        return {
+          ...store,
+          favorites: store.favorites.filter(fav => fav.starId !== action.payload.starId)
+        };
+
       case 'fetchedAllPeople':
         const peopleArray = action.payload;
         return {
@@ -41,10 +46,37 @@ export default function storeReducer(store, action = {}) {
           ...store,
           singlePerson: singlePersonArray
         }
+        
       case 'fetchedAllVehicles':
         const vehiclesArray = action.payload;
+        return {
+          ...store,
+          allVehicles: vehiclesArray
+        }
+
       case 'fetchedAllPlanets':
-        break;
+        const planetArray = action.payload;
+        return {
+          ...store,
+          allPlanets: [...planetArray]
+        }
+
+case 'fetchedAllFilms':
+  return {
+    ...store,
+    allFilms: action.payload,
+    filmsLoading: false
+  };
+
+case 'fetchFilmsError':
+  return {
+    ...store,
+    filmsError: action.payload,
+    filmsLoading: false
+  };
+
     default:
-return store;  }    
+      console.warn(`Unkown action: ${action.type}`)
+      return store  
+}    
 }

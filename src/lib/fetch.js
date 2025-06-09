@@ -1,5 +1,6 @@
-const baseURL = 'https://www.swapi.tech/api'
+import { useParams } from "react-router-dom";
 
+const baseURL = 'https://www.swapi.tech/api'
 
 //Fetch and return all People
 export const fetchAllPeople = async (dispatch) => {
@@ -15,7 +16,7 @@ export const fetchAllPeople = async (dispatch) => {
       type: 'fetchedAllPeople',
       payload: data.results  
     });
-    console.log(data);
+    console.log('data');
     return data.results;
   } 
   catch (error) {
@@ -23,30 +24,8 @@ export const fetchAllPeople = async (dispatch) => {
   }
 };
     
-//Fetch and return a single person called
-export const fetchOnePerson = async (dispatch) => {
-    const personId = 1;
 
-  try {
-    const response = await fetch(`${baseURL}/people/${personId}`)
-    
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    
-    const data = await response.json();
-    dispatch({
-      type: 'fetchOnePerson',
-      payload: data.results  
-    });
-    console.log(data);
-    return data.results;
-  } 
-  catch (error) {
-    console.error("Error getting Star Wars People profiles", error);
-  }
-};
-
+//Fetch Planets
 export const fetchAllPlanets = async(dispatch) => {
 try {
     const response = await fetch(`${baseURL}/planets`)
@@ -61,14 +40,15 @@ try {
         type: 'fetchedAllPlanets',
         payload: data.results
     });
-    return data
+        console.log('planets loaded')
+        return data
 }
 catch (error) {
-    console.error("Error getting Star Wars People planets", error)
+    console.error("Error getting Star Wars Planets", error)
 }
 }
 
-
+//Fetch Vehicles
 export const fetchAllVehicles = async(dispatch) => {
 try {
     const response = await fetch(`${baseURL}/vehicles`)
@@ -79,13 +59,34 @@ try {
     const data = await response.json()
     console.log(data.results)
       dispatch({
-        type: 'fetchedVehicles',
+        type: 'fetchedAllVehicles',
         payload: data.results
     })
     return data.results
 }
 catch (error) {
-    console.error("Error getting Star Wars People vehicles", error)
+    console.error("Error getting Star Wars vehicles", error)
+}
 }
 
+
+//Fetch Movies
+export const fetchAllFilms = async(dispatch) => {
+try {
+    const response = await fetch(`${baseURL}/films`)
+    
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    const movies = await response.json()
+    console.log(movies.results)
+      dispatch({
+        type: 'fetchedAllFilms',
+        payload: movies.results
+    })
+    return movies.results
+}
+catch (error) {
+    console.error("Error getting Star Wars Films", error)
+}
 }
